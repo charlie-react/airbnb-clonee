@@ -1,0 +1,27 @@
+import getListingById from "@/app/actions/getListingById"
+import ClientOnly from "@/app/components/ClientsOnly";
+import EmptyState from "@/app/components/EmptyState";
+
+interface IParams{
+    listingId?:string;
+}
+const ListingPage = async ({params}:{params:IParams})=>{
+    const  listing = await getListingById(params)
+    console.log(listing)
+
+    if(!listing){
+        return(
+            <ClientOnly>
+                 <EmptyState  />
+            </ClientOnly>
+           
+        )
+    }
+    return (
+        <div>
+            {listing.title}
+        </div>
+    )
+}
+
+export default ListingPage
