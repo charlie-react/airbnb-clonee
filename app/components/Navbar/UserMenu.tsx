@@ -9,6 +9,8 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
 import useRentModal from "@/app/hooks/useRentModal";
+ 
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -20,6 +22,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const rentModal = useRentModal();
   const [isOpen, setIsOpen] = useState(false);
 
+  const router = useRouter()
 
   const handleRent = useCallback(() => {
     if (!currentUser) {
@@ -60,13 +63,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItems onClick={() => {}} label="My Trips" />
+                <MenuItems onClick={() => router.push("/trips")} label="My Trips" />
 
-                <MenuItems onClick={() => {}} label="My Favorites" />
+                <MenuItems onClick={() => router.push("/favorites")} label="My Favorites" />
 
-                <MenuItems onClick={() => {}} label="My Reservations" />
+                <MenuItems onClick={() => router.push("/reservations")} label="My Reservations" />
 
-                <MenuItems onClick={() => {}} label="My Properties" />
+                <MenuItems onClick={() =>  router.push("/properties")} label="My Properties" />
 
                 <MenuItems onClick={rentModal.onOpen} label="Airbnb My Home" />
 

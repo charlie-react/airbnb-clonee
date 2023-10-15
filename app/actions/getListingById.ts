@@ -4,21 +4,15 @@ interface IParams {
   listingId?: string;
 }
 
-export default async function getListingById(
-  params: IParams
-) {
+export default async function getListingById(params: IParams) {
   try {
-    const { listingId } = params;
-
-    console.log(listingId)
-
     const listing = await prisma.listing.findUnique({
       where: {
-        id: listingId,
+        id: params.listingId,
       },
       include: {
-        user: true
-      }
+        user: true,
+      },
     });
 
     if (!listing) {
@@ -27,21 +21,15 @@ export default async function getListingById(
 
     return {
       ...listing,
-      createdAt: listing.createdAt.toString(),
+      createdAt: listing.createdAt.toISOString(),
       user: {
         ...listing.user,
-        createdAt: listing.user.createdAt.toString(),
-        updatedAt: listing.user.updatedAt.toString(),
-        emailVerified: 
-          listing.user.emailVerified?.toString() || null,
-      }
+        createdAt: listing.user.createdAt.toISOString(),
+        updatedAt: listing.user.updatedAt.toISOString(),
+        emailVerified: listing.user.emailVerified?.toISOString() || null,
+      },
     };
   } catch (error: any) {
     throw new Error(error);
   }
 }
-
-
-
-
- 

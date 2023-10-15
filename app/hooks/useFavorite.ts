@@ -18,16 +18,18 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   const loginModal = useLoginModal();
 
   const hasFavorited = useMemo(() => {
+    console.log(listingId);
+    console.log(typeof listingId);
     const list = currentUser?.favoriteIds || [];
 
     return list.includes(listingId);
   }, [currentUser, listingId]);
 
- 
-
   const toggleFavorite = useCallback(
     async (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
+
+      // const list = currentUser?.favoriteIds || [];
 
       if (!currentUser) {
         return loginModal.onOpen();
@@ -37,47 +39,12 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         let request;
 
         console.log(hasFavorited);
+        // console.log(list.includes(listingId))
 
         if (hasFavorited) {
-          request = () =>
-            axios.delete(`/api/favorites/${listingId}`).catch(function (error) {
-              if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-              } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-              } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log("Error", error.message);
-              }
-              console.log(error.config);
-            });
+          request = () => axios.delete(`/api/favorites/${listingId}`);
         } else {
-          request = () =>
-            axios.post(`/api/favorites/${listingId}`).catch(function (error) {
-              if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-              } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-              } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log("Error", error.message);
-              }
-              console.log(error.config);
-            });
+          request = () => axios.post(`/api/favorites/${listingId}`);
         }
 
         await request();
