@@ -6,7 +6,8 @@ import getCurrentUser from "../actions/getCurrentUser";
  
 import getListings from "../actions/getListings";
 import PropertiesClient from "./PropertiesClient";
-import getReservations from "../actions/getReservations";
+
+
 
 const PropertiesPage = async () => {
   const currentUser = await getCurrentUser();

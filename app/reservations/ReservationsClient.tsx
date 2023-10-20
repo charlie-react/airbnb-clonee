@@ -1,7 +1,7 @@
 "use client";
 
 import Container from "../components/Container";
-import { SafeListing, SafeReservations, SafeUser } from "../types";
+import { SafeListing, SafeReservation, SafeUser } from "../types";
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Heading from "../components/Heading";
@@ -10,7 +10,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 interface ReservationsClientProps {
-  reservations: SafeReservations[];
+  reservations: SafeReservation[];
   currentUser?: SafeUser | null;
 }
 

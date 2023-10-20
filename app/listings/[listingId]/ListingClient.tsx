@@ -2,7 +2,7 @@
 
 import Container from "@/app/components/Container";
 import { categories } from "@/app/components/Navbar/Categories";
-import { SafeListing, SafeReservations, SafeUser  } from "@/app/types";
+import { SafeListing, SafeReservation, SafeUser  } from "@/app/types";
  
 
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -22,10 +22,10 @@ const initialDateRange = {
   key: "selection",
 };
 interface ListingClientProps {
+  reservations?: SafeReservation[];
   listing: SafeListing & {
     user: SafeUser;
   };
-  reservations?: SafeReservations[];
   currentUser?: SafeUser | null;
 }
 
@@ -40,7 +40,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
 
-    reservations.forEach((reservation) => {
+    reservations.forEach((reservation:any) => {
       const range = eachDayOfInterval({
         start: new Date(reservation.startDate),
         end: new Date(reservation.endDate),

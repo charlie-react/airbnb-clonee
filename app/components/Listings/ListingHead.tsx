@@ -11,7 +11,7 @@ interface ListingHeadProps {
   title: string;
   locationValue: string;
   imageSrc: string;
-  id?: string;
+  id: string;
   currentUser?: SafeUser | null;
 }
 
