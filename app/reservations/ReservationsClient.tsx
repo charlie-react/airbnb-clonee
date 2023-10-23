@@ -62,54 +62,54 @@
 
 // export default ReservationsClient;
 
-'use client';
+"use client";
 
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { SafeReservation, SafeUser } from "@/app/types"
-;
+import { SafeReservation, SafeUser } from "@/app/types";
 import Heading from "@/app/components/Heading";
 import Container from "@/app/components/Container";
-import ListingCard from "@/app/components/listings/ListingCard";
+import ListingCard from "@/app/components/Listings/ListingCard";
 
 interface ReservationsClientProps {
-  reservations: SafeReservation[],
-  currentUser?: SafeUser | null,
+  reservations: SafeReservation[];
+  currentUser?: SafeUser | null;
 }
 
 const ReservationsClient: React.FC<ReservationsClientProps> = ({
   reservations,
-  currentUser
+  currentUser,
 }) => {
   const router = useRouter();
-  const [deletingId, setDeletingId] = useState('');
+  const [deletingId, setDeletingId] = useState("");
 
-  const onCancel = useCallback((id: string) => {
-    setDeletingId(id);
+  const onCancel = useCallback(
+    (id: string) => {
+      setDeletingId(id);
 
-    axios.delete(`/api/reservations/${id}`)
-    .then(() => {
-      toast.success('Reservation cancelled');
-      router.refresh();
-    })
-    .catch(() => {
-      toast.error('Something went wrong.')
-    })
-    .finally(() => {
-      setDeletingId('');
-    })
-  }, [router]);
+      axios
+        .delete(`/api/reservations/${id}`)
+        .then(() => {
+          toast.success("Reservation cancelled");
+          router.refresh();
+        })
+        .catch(() => {
+          toast.error("Something went wrong.");
+        })
+        .finally(() => {
+          setDeletingId("");
+        });
+    },
+    [router]
+  );
 
   return (
     <Container>
-      <Heading
-        title="Reservations"
-        subtitle="Bookings on your properties"
-      />
-      <div 
+      <Heading title="Reservations" subtitle="Bookings on your properties" />
+      <div
         className="
           mt-10
           grid 
@@ -136,7 +136,7 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
         ))}
       </div>
     </Container>
-   );
-}
- 
+  );
+};
+
 export default ReservationsClient;
