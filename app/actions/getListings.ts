@@ -156,7 +156,7 @@ export default async function getListings(
 
     if (startDate && endDate) {
       query.NOT = {
-        reservation: {
+        reservations: {
           some: {
             OR: [
               {
