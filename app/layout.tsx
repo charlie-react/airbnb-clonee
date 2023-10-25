@@ -55,6 +55,9 @@ import "./globals.css";
 import ClientOnly from "./components/ClientsOnly";
 import getCurrentUser from "./actions/getCurrentUser";
 
+
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Airbnb",
   description: "Airbnb Clone",
