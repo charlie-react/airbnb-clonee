@@ -163,7 +163,7 @@ export const categories = [
     description: 'This property is modern!'
   },
   {
-    label: 'Countryside',
+    label: 'Country',
     icon: TbMountain,
     description: 'This property is in the countryside!'
   },
