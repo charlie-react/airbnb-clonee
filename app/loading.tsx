@@ -1,10 +1,4 @@
-// import Loader from "./components/Loader";
-
-// const loading = () => {
-//   return <Loader />;
-// };
-
-// export default loading;
+ 
 import Loader from "@/app/components/Loader";
 
 const Loading = () => {
